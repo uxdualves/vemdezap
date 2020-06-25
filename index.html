@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+@keyframes shadow-pulse
+{
+     0% {
+          box-shadow: 0 0 0 0px rgba(0, 0, 0, 0.2);
+     }
+     100% {
+          box-shadow: 0 0 0 35px rgba(0, 0, 0, 0);
+     }
+}
+* {
+  box-sizing: border-box;
+
+}
+    body{background-color: #e0d9d1; padding: 0; margin: 0; font-family: Helvetica, Arial, sans-serif}
+        input:focus, textarea:focus, select:focus{
+        outline: none;
+    }
+    #number{
+        border: none;
+        border-radius: 7.5px;
+        padding: .7rem;
+        background-color: #dcf8c6;
+        border-bottom: 2px solid rgba(74,74,74,.3);
+        outline-color: 0;
+        display: block;
+        width: 100%;
+        font-size: 1.5rem;
+        animation: shadow-pulse 1s 3;
+        
+    }
+    .navbar{background-color: #ededed;padding:1px 0;
+    border-bottom: 1px solid rgba(74,74,74,.3);
+        margin-bottom: 1rem;
+    }
+    h2{
+        color: #333
+    }
+.container {
+    width: 100%;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    margin-right: auto;
+    margin-left: auto;
+}
+    .container{
+        max-width: 1140px;
+    }
+.row {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+    .w25{
+        max-width: 25%;
+        margin: auto;
+        
+    }  
+    .logo-api{
+        width: 124px;
+        display: none;
+    }
+    .center{
+        text-align: center;
+    display:block;
+    margin:auto;
+    }
+    .mt-3{
+        margin-top: 3rem;
+    }
+    .active{
+        transition: 0.5s ease-in-out;
+    }
+    .error_active{
+        border-bottom: 2px solid #d00 !important;
+    }
+    .ok_number{
+        border-bottom: 2px solid #00bfa5 !important;
+        
+    }
+    .logo-api.active{
+        display: inherit
+    }
+    
+    
+@media (max-width: 575.98px) { 
+.w25 {
+    max-width: 80%;
+    margin: auto;
+}
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) { 
+.w25 {
+    max-width: 70%;
+    margin: auto;
+}
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) { 
+.w25 {
+    max-width: 60%;
+    margin: auto;
+}
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) { 
+.w25 {
+    max-width: 50%;
+    margin: auto;
+}
+}
+
+@media (min-width: 1200px) { 
+.w25 {
+    max-width: 40%;
+    margin: auto;
+}
+}
+    
+            #img-api{
+            -webkit-animation: fadein .5s; /* Safari, Chrome and Opera > 12.1 */
+            -moz-animation: fadein .5s; /* Firefox < 16 */
+            -ms-animation: fadein .5s; /* Internet Explorer */
+            -o-animation: fadein .5s; /* Opera < 12.1 */
+            animation: fadein .5s;
+            }        
+            @keyframes fadein {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+            }
+            /* Firefox < 16 */
+            @-moz-keyframes fadein {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+            }
+            /* Safari, Chrome and Opera > 12.1 */
+            @-webkit-keyframes fadein {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+            }
+            /* Internet Explorer */
+            @-ms-keyframes fadein {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+            }
+            /* Opera < 12.1 */
+            @-o-keyframes fadein {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+            }
+    
+</style>
+</head>
+<body>
+<nav class="navbar">
+    <div class="container">
+    <h2 class="logo">VemDeZap</h2>
+    <div class="menu"></div>    
+    </div>
+</nav>
+    
+<div class="container">
+    <div class="row w25">
+        <input id="number" class="" type="tel" />
+    </div>
+
+<div class="row center mt-3">
+    <a href="#" class="api" id="zap" target="_blank">
+    <img src="logo.svg" class="logo-api" id="img-api" />
+    </a>
+</div>
+</div>
+<script>
+ if(window.clipboardData) {   
+   console.log(window.clipboardData.getData("Text"));
+ } 
+function gerarAPI(fone){
+    let img = document.getElementById("img-api");
+    let api = document.getElementById("zap");
+    img.classList.add("active");
+    api.href = "https://api.whatsapp.com/send?phone=55"+fone;
+}
+function zerarTudo(){
+    let img = document.getElementById("img-api");
+    let api = document.getElementById("zap");
+    img.classList.remove("active");
+    api.href = "#";
+}
+    
+function verify(){
+let tel = input.value;
+    tel = tel.replace(/\D/g,'');
+    
+if(tel.substr(0,2) == "55") tel = tel.substr(2);
+if(tel.substr(0,1) == "0") tel = tel.substr(1);
+    let err = document.getElementById("number");
+    
+if(tel.length === 11) {
+
+    err.classList.add("ok_number")
+    err.classList.remove("error_active")
+    gerarAPI(tel);
+
+}else if(tel.length > 11){
+
+    err.classList.add("error_active")
+    err.classList.remove("ok_number")
+    zerarTudo()
+}else{
+
+    err.classList.remove("ok_number")
+    err.classList.remove("error_active")
+    zerarTudo()
+}
+
+    
+};    
+let input = document.getElementById("number");
+input.onkeyup = function(){verify();}
+
+
+</script>
+</body>
+</html>
