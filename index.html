@@ -224,6 +224,9 @@ if(tel.length === 11) {
 };    
 let input = document.getElementById("number");
 input.onkeyup = function(){verify();}
+input.onchange = function(){verify();}
+input.onpaste = function(){verify();}
+input.onkeypress = function(){verify();}
 
 
 </script>
